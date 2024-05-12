@@ -5,7 +5,7 @@ const nvdRouter = require('./route/cve-api-route');
 const cveRouter = require('./route/view-route');
 const Metadata = require('./models/cve-metadata');
 const CVE = require('./models/cve-model');
-const sleep = require('./module/sleep-module');
+const sleep = require('./models/sleep-module');
 const { requestOptions, cvehistory_url, cvelist_url } = require ('./config/config');
 
 require('dotenv').config();

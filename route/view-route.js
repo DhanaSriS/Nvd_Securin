@@ -3,7 +3,7 @@ const cveMetadata = require('../models/cve-metadata');
 
 const CVE = require('../models/cve-model');
 const { sortBy } = require('../config/config');
-const sleep = require('../module/sleep-module');
+const sleep = require('../models/sleep-module');
 
 router.get('/list', async (req, res) => {
   var total = 0;
