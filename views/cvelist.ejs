@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CVE</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <script type="text/javascript" src="../script.js"></script>
+</head>
+<body>
+  <h1>CVE LIST</h1>
+  <div class="header">
+    <p id="total-count">Total Records: <%= totalRecords %></p>
+    <form action='/cves/list' method="GET" name="form">
+      <input type="text" placeholder="Enter CVE ID" name="search">
+      <input type="hidden" name="page" value='<%= page %>'>
+      <input type="hidden" name="limit" value='<%= limit %>'>
+      <input type="hidden" name="sortMode" value='<%= sortmode %>'>
+      <input type="submit" value="Search">
+    </form>
+  </div>
+    <table>
+        <thead>
+          <tr>
+            <th onclick="setSortMode('<%=page%>', '<%=limit%>', '1', '<%=search%>')">CVE ID<span>⇅</span></th>
+            <th>IDENTIFIER</th>
+            <th>PUBLISHED DATE</th>
+            <th onclick="setSortMode('<%=page%>', '<%=limit%>', '2', '<%=search%>')">LAST MODIFIED DATE<span>⇅</span></th>
+            <th>STATUS</th>
+            <th onclick="setSortMode('<%=page%>', '<%=limit%>', '3', '<%=search%>')">SCORE<span>⇅</span></th>
+          </tr>
+        </thead>
+        <tbody id="cve-details">
+          <% for(let i = 0; i < data.length; i++) { %>
+              <tr onclick="detailHandler('<%=data[i].id%>')">
+                <td><%= data[i].id %></td>
+                <td><%= data[i].sourceIdentifier %></td>
+                <td><%= data[i].published.toString().split(" ")[2] + " " + data[i].published.toString().split(" ")[1] + " " +data[i].published.toString().split(" ")[3] %></td>
+                <td><%= data[i].lastModified.toString().split(" ")[2] + " " + data[i].lastModified.toString().split(" ")[1] + " " +data[i].lastModified.toString().split(" ")[3] %></td>
+                <td><%= data[i].vulnStatus %></td>
+                <td><%= data[i].metrics.cvssMetricV2.length > 0 ? data[i].metrics.cvssMetricV2[0].cvssData.baseScore :
+                            data[i].metrics.cvssMetricV30.length > 0 ? data[i].metrics.cvssMetricV30[0].cvssData.baseScore :
+                            data[i].metrics.cvssMetricV31.length > 0 ? data[i].metrics.cvssMetricV31[0]?.cvssData.baseScore :
+                              "NA" %></td>
+              </tr>
+          <% } %>
+        </tbody>
+      </table>
+      <div class="footer">
+
+        <div class="results-per-page">
+          <label for="resultsPerPage">Results per page:</label>
+          <select id="resultsPerPage" onchange="setLimit('<%=page%>', this.value, '<%=sortmode%>', '<%=search%>')">
+            <option value="10" <%= limit == '10' ? 'selected' : ''%>>10</option>
+            <option value="50" <%= limit == '50' ? 'selected' : ''%>>50</option>
+            <option value="100" <%= limit == '100' ? 'selected' : ''%>>100</option>
+          </select>
+        </div>
+        <div class="pagination">
+          <div><p id="record-count"><%= parseInt(page - 1) * parseInt(limit) + 1%> - <%= parseInt(page) * parseInt(limit) < totalRecords ? parseInt(page) * parseInt(limit) : totalRecords%> of <%= totalRecords%> records</p>
+          </div>
+          <button class="page-btn" id="left" onclick="leftClick('<%=page%>', '<%=limit%>', '<%=sortmode%>', '<%=search%>')">◄</button>
+          <button class="page-btn active" id="<%=page%>"><%=page%></button>
+          <% for (var i = parseInt(page) + 1; i < parseInt(page) + 5; i++) { %>
+            <% if(totalRecords - (i - 1) * parseInt(limit) > 0) {%>
+              <button class="page-btn" id='<%=i%>' onclick="pageClick('<%=i%>', '<%=limit%>', '<%=sortmode%>', '<%=search%>')"><%=i%></button>   
+            <% } %>
+          <% } %>
+            <button class="page-btn" id="right" onclick="rightClick('<%=page%>', '<%=limit%>', '<%=sortmode%>', '<%=search%>', '<%=totalRecords%>')">►</button>
+          </div>
+        </div>
+</body>
+</html>

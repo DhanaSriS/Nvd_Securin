@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vulnerability Details</title>
+  <link rel="stylesheet" type="text/css" href="../index.css">
+</head>
+<body>
+    <h2><%= data.id %></h2>
+    <div class="description">
+        <h3>Description:</h3>
+        <p><%= data.descriptions[0].value%></p>
+    </div>
+    <div class="metrics">
+        <% if (!data.metrics.cvssMetricV2.length == 0) { %>
+            <h3>CVSS V2 METRICS:</h3>
+            <h5>Severity: <span><%= data.metrics.cvssMetricV2[0].baseSeverity %></span>&nbsp;&nbsp;&nbsp;&nbsp;Score: <span><%= data.metrics.cvssMetricV2[0]?.cvssData.baseScore %></span></h5>
+            <h5>Vector String &nbsp;&nbsp; <span><%= data.metrics.cvssMetricV2[0].cvssData.vectorString %></span></h5>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Access Vector</th>
+                        <th>Access Complexity</th>
+                        <th>Authentication</th>
+                        <th>Confidentiality Impact</th>
+                        <th>Integrity Impact</th>
+                        <th>Availability Impact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><%= data.metrics.cvssMetricV2[0].cvssData.accessVector %></td>
+                        <td><%= data.metrics.cvssMetricV2[0].cvssData.accessComplexity %></td>
+                        <td><%= data.metrics.cvssMetricV2[0].cvssData.authentication %></td>
+                        <td><%= data.metrics.cvssMetricV2[0].cvssData.confidentialityImpact %></td>
+                        <td><%= data.metrics.cvssMetricV2[0].cvssData.integrityImpact %></td>
+                        <td><%= data.metrics.cvssMetricV2[0].cvssData.availabilityImpact %></td>
+                    </tr>
+                </tbody>
+            </table>
+        <% } else if (!data.metrics.cvssMetricV30.length == 0) {%>
+            <h3>CVSS V30 METRICS:</h3>
+            <h5>Severity: <span><%= data.metrics.cvssMetricV30[0].cvssData.baseSeverity %></span>&nbsp;&nbsp;&nbsp;&nbsp;Score: <span><%= data.metrics.cvssMetricV30[0]?.cvssData.baseScore %></span></h5>
+            <h5>Vector String &nbsp;&nbsp; <span><%= data.metrics.cvssMetricV30[0].cvssData.vectorString %></span></h5>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Privileges Required</th>
+                        <th>User Interaction</th>
+                        <th>Scope</th>
+                        <th>Confidentiality Impact</th>
+                        <th>Integrity Impact</th>
+                        <th>Availability Impact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><%= data.metrics.cvssMetricV30[0].cvssData.privilegesRequired %></td>
+                        <td><%= data.metrics.cvssMetricV30[0].cvssData.userInteraction %></td>
+                        <td><%= data.metrics.cvssMetricV30[0].cvssData.scope %></td>
+                        <td><%= data.metrics.cvssMetricV30[0].cvssData.confidentialityImpact %></td>
+                        <td><%= data.metrics.cvssMetricV30[0].cvssData.integrityImpact %></td>
+                        <td><%= data.metrics.cvssMetricV30[0].cvssData.availabilityImpact %></td>
+                    </tr>
+                </tbody>
+            </table>
+        <% } else if (!data.metrics.cvssMetricV31.length == 0) {%>
+            <h3>CVSS V31 METRICS:</h3>
+            <h5>Severity: <span><%= data.metrics.cvssMetricV31[0].cvssData.baseSeverity %></span>&nbsp;&nbsp;&nbsp;&nbsp;Score: <span><%= data.metrics.cvssMetricV31[0]?.cvssData.baseScore %></span></h5>
+            <h5>Vector String &nbsp;&nbsp; <span><%= data.metrics.cvssMetricV31[0].cvssData.vectorString %></span></h5>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Privileges Required</th>
+                        <th>User Interaction</th>
+                        <th>Scope</th>
+                        <th>Confidentiality Impact</th>
+                        <th>Integrity Impact</th>
+                        <th>Availability Impact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><%= data.metrics.cvssMetricV31[0].cvssData.privilegesRequired %></td>
+                        <td><%= data.metrics.cvssMetricV31[0].cvssData.userInteraction %></td>
+                        <td><%= data.metrics.cvssMetricV31[0].cvssData.scope %></td>
+                        <td><%= data.metrics.cvssMetricV31[0].cvssData.confidentialityImpact %></td>
+                        <td><%= data.metrics.cvssMetricV31[0].cvssData.integrityImpact %></td>
+                        <td><%= data.metrics.cvssMetricV31[0].cvssData.availabilityImpact %></td>
+                    </tr>
+                </tbody>
+            </table>
+        <% } %>
+    </div>
+    <div class="scores">
+        <% if (!data.metrics.cvssMetricV2.length == 0) { %>
+            <h3>Scores:</h3>
+            <h5>Exploitability Score: <span><%= data.metrics.cvssMetricV2[0].exploitabilityScore %></span></h5>
+            <h5>Impact Score: <span><%= data.metrics.cvssMetricV2[0].impactScore %></span></h5>
+        <% } else if (!data.metrics.cvssMetricV30.length == 0) {%>
+            <h3>Scores:</h3>
+            <h5>Exploitability Score: <span><%= data.metrics.cvssMetricV30[0].exploitabilityScore %></span></h5>
+            <h5>Impact Score: <span><%= data.metrics.cvssMetricV30[0].impactScore %></span></h5>
+        <% } else if (!data.metrics.cvssMetricV31.length == 0) {%>
+            <h3>Scores:</h3>
+            <h5>Exploitability Score: <span><%= data.metrics.cvssMetricV31[0].exploitabilityScore %></span></h5>
+            <h5>Impact Score: <span><%= data.metrics.cvssMetricV31[0].impactScore %></span></h5>
+        <% } %>
+    </div>
+    <% if(!data.configurations.length == 0) {%>
+    <div class="cpe">
+        <h3>CPE:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Criteria</th>
+                    <th>Match Criteria ID</th>
+                    <th>Vulnerable</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(var conf = 0; conf < data.configurations.length; conf++) {%>
+                    <% for(var node = 0; node < data.configurations[conf].nodes.length; node++) {%>
+                        <% for(var cpe = 0; cpe < data.configurations[conf].nodes[node].cpeMatch.length; cpe++) {%>
+                            <tr>
+                                <td><%= data.configurations[conf].nodes[node].cpeMatch[cpe].criteria %></td>
+                                <td><%= data.configurations[conf].nodes[node].cpeMatch[cpe].matchCriteriaId %></td>
+                                <td><%= data.configurations[conf].nodes[node].cpeMatch[cpe].vulnerable ? "Yes" : "No" %></td>
+                            </tr>
+                        <% } %>
+                    <% } %>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+    <% } %>
+    <% if(!data.references.length == 0) {%>
+    <div class="references">
+        <h3>REFERENCES:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Serial No.</th>
+                    <th>Source</th>
+                    <th>URL</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(var ref = 0; ref < data.references.length; ref++) {%>
+                    <tr>
+                        <td><%= ref + 1 %></td>
+                        <td><%= data.references[ref].source %></td>
+                        <td><a href='<%= data.references[ref].url %>'><%= data.references[ref].url %></a></td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+    <% } %>
+</body>
+</html>
